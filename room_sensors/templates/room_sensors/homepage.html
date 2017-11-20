@@ -1,0 +1,37 @@
+{% extends 'room_sensors/base.html' %}
+{% load staticfiles %}
+
+{% block site_content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-4 ">
+        <div class="card text-center box_shadow" style="width: 20rem;">
+              <div class="card-body">
+                <h4 class="card-title">{{ sensor_values.node_name }}</h4>
+                <h6 class="card-subtitle mb-2 text-muted">Node#: {{ sensor_values.node_number }}</h6>
+                <p class="card-text">Last Refreshed: {{ sensor_values.time }}</p>
+              </div>
+            </div>
+        </div>
+	</br>
+        <div class="col-md-4 ">
+            <div class="card text-center box_shadow" style="width: 20rem;">
+              <div class="card-body">
+                <h4 class="card-title">Temperature</h4>
+                <p class="card-text">{{ sensor_values.temperature }}&#176 F</p>
+              </div>
+            </div>
+        </div>
+	</br>
+        <div class="col-md-4 ">
+            <div class="card text-center box_shadow" style="width: 20rem;">
+              <div class="card-body">
+                <h4 class="card-title">Humidity</h4>
+                <p class="card-text">{{sensor_values.humidity}}%</p>
+              </div>
+            </div>
+        </div>
+    <div class="row">
+</div>
+
+{% endblock %}

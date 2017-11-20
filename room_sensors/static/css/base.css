@@ -1,0 +1,13 @@
+body {
+    background: linear-gradient(to right, #594157, #271F30);
+}
+
+.site-content {
+    padding-top: 10px;
+    padding-left: 10px;
+}
+
+.box_shadow {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
