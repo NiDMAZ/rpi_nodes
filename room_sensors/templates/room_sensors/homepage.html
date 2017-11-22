@@ -5,7 +5,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-4 ">
-        <div class="card text-center box_shadow" style="width: 20rem;">
+        <div class="card text-center box_shadow card_widget" >
               <div class="card-body">
                 <h4 class="card-title">{{ sensor_values.node_name }}</h4>
                 <h6 class="card-subtitle mb-2 text-muted">Node#: {{ sensor_values.node_number }}</h6>
@@ -15,7 +15,7 @@
         </div>
 	</br>
         <div class="col-md-4 ">
-            <div class="card text-center box_shadow" style="width: 20rem;">
+            <div class="card text-center box_shadow card_widget" >
               <div class="card-body">
                 <h4 class="card-title">Temperature</h4>
                 <p class="card-text">{{ sensor_values.temperature }}&#176 F</p>
@@ -24,7 +24,7 @@
         </div>
 	</br>
         <div class="col-md-4 ">
-            <div class="card text-center box_shadow" style="width: 20rem;">
+            <div class="card text-center box_shadow card_widget" >
               <div class="card-body">
                 <h4 class="card-title">Humidity</h4>
                 <p class="card-text">{{sensor_values.humidity}}%</p>

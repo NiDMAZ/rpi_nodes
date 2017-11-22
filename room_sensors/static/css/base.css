@@ -2,9 +2,13 @@ body {
     background: linear-gradient(to right, #594157, #271F30);
 }
 
+.card_widget {
+	margin-top: .2em;
+}
+
 .site-content {
-    padding-top: 10px;
-    padding-left: 10px;
+   /* padding-top: 10px;
+    padding-left: 10px; */
 }
 
 .box_shadow {
