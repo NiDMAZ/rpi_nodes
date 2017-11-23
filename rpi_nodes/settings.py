@@ -148,7 +148,7 @@ LOGGING = {
         'file': {
           'level': 'INFO',
             'class': 'logging.FileHandler',
-            'filename': '/var/tmp/django_website.log',
+            'filename': '/var/tmp/rpi_node.log',
             'formatter': 'default',
         }
     },
