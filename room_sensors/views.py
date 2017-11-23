@@ -15,3 +15,7 @@ def homepage(request):
 def api_sensor(request):
     temp_vals = TempReader.get_current()
     return JsonResponse(temp_vals)
+
+def api_sensor_historical(request):
+    temp_vals = TempReader.get_historical()
+    return JsonResponse(temp_vals)
