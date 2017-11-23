@@ -57,11 +57,12 @@ class TemperatureReader(object):
             logger.info(self._current)
 
     def _update_cache(self):
-        while not self.stop_event.isSet() and datetime.datetime.now() >= self.next_runtime:
-            logger.info('Updating Cache...')
-            self.check_temp()
-            self.next_runtime = datetime.datetime.now() + datetime.timedelta(seconds=self.polling)
-            logger.info('Cache will update at: {}'.format(self.next_runtime))
+        while True:
+            if not self.stop_event.isSet() and datetime.datetime.now() >= self.next_runtime:
+                logger.info('Updating Cache...')
+                self.check_temp()
+                self.next_runtime = datetime.datetime.now() + datetime.timedelta(seconds=self.polling)
+                logger.info('Cache will update at: {}'.format(self.next_runtime))
 
     def run(self):
         try:
