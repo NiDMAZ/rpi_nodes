@@ -17,5 +17,9 @@ def api_sensor(request):
     return JsonResponse(temp_vals)
 
 def api_sensor_historical(request):
+    new_dict = dict()
     temp_vals = TempReader.get_historical()
-    return JsonResponse(temp_vals)
+    for k, v in temp_vals.iteritems():
+        new_dict[str(k)] = v
+
+    return JsonResponse(new_dict)
