@@ -38,13 +38,9 @@ class RpiNode(object):
         
 
 class TemperatureReader(RpiNode):
-    DEFAULT_POLLING = 60
-    DEFAULT_MODEL = 22
-    DEFAULT_PIN = 4
-    DEFAULT_LOCATION = "UNKNOWN"
-
     def __init__(self):
         super(TemperatureReader, self).__init__()
+        self._current = {}
 
     def read_sensor(self, s_model, s_pin):
         try:
@@ -52,17 +48,17 @@ class TemperatureReader(RpiNode):
             temperature = self.c2f(self._whole_num(temperature))
             humidity = self._whole_num(humidity)
             dt_now = datetime.datetime.now()
-            # self.cache[dt_now] = {'humidity': humidity, 'temperature': temperature}
             logger.info('Cached Updated complete')
-        except Exception as e:
-            logger.exception(e)
-        finally:
             current = {'node_name': self._config.get("rpi_node_name"),
                     'node_number': self._config.get("rpi_node_number"),
                     'humidity': humidity,
-                    'temperature': temperature}
-            logger.info(current)
-	return current
+                    'temperature': temperature,
+                    'updated': dt_now}
+            return current
+
+        except Exception as e:
+            logger.exception(e)
+	    return None
 
     
     def _whole_num(self, fl_num):
@@ -73,13 +69,19 @@ class TemperatureReader(RpiNode):
 
     def _update_cache(self, current_values):
         with self._set_lock.write_lock():
-            self.cache.update(datetime.datetime.now(): { current_values })
+            self._current[current_values.get('sensor_name')] = current_values
+            self.cache.update({datetime.datetime.now():  current_values} )
 
     def get_historical(self, start_dt=None, end_dt=None):
         # TODO ADD THE ABILITY TO PASS A DATETIME RANGE
         if start_dt is None and end_dt is None:
 	    with self._set_lock.read_lock():
             	return self.cache
+
+    def get_current(self):
+        with self._set_lock.read_lock():
+            current = self._current
+        return current   
 
     def _sensor_thread(self, sensor_name):
 	s_pin = self._config.get("temperature_reader").get("sensors").get(sensor_name).get("dht_gpio_port", 2)
@@ -91,7 +93,11 @@ class TemperatureReader(RpiNode):
         while True:
             if not self._stop_event.isSet() and datetime.datetime.now() >= next_run_time:
                 logger.info('{}_Updating Cache...'.format(sensor_name))
-                self._update_cache(self.read_sensor(s_model=s_model, s_pin=s_pin))
+		results =  self.read_sensor(s_model=s_model, s_pin=s_pin)
+		results['location'] = location
+		results['sensor_name'] = sensor_name
+                logger.info(results)
+                self._update_cache(results)
                 next_run_time = datetime.datetime.now() + datetime.timedelta(seconds=polling)
                 logger.info('{}_Cache will update at: {}'.format(sensor_name, next_run_time))
 
