@@ -36,6 +36,10 @@ class RpiNode(object):
         with open('/etc/rpi_node/rpi_node.json', 'r') as f:
             self._config  = json.load(f)
         
+    @property
+    def roomName(self):
+        return self._config.get("rpi_node_name")
+
 
 class TemperatureReader(RpiNode):
     def __init__(self):

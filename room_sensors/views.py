@@ -9,7 +9,11 @@ from read_sensors import *
 
 def homepage(request):
     temp_vals = TempReader.get_current()
-    page_context = {'sensor_values': temp_vals}
+    page_context = {
+        'temperature': temp_vals,
+        'room_name': TempReader.roomName,
+    }
+
     return render(request, 'room_sensors/homepage.html', page_context)
 
 def api_sensor(request):

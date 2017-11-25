@@ -3,8 +3,28 @@
 
 {% block site_content %}
 <div class="container">
-    <div class="row">
-        <div class="col-md-4 ">
+	{% if temperature is not None %}
+        <div class="row">
+            <h1 class="section_header">Temperature & Humidity</h1>
+       </div>
+       <div class="row">
+		{% for sensor, val in temperature.items %}
+			<div class="col-md-4 ">
+			<div class="card text-center box_shadow card_widget" >
+			      <div class="card-body">
+				<h4 class="card-title">{{ val.location }}</h4>
+				<h6 class="card-subtitle mb-2 text-muted">Updated: {{ val.updated  | date:"n/j/Y f:s A"}}</h6>
+				<p class="card-text">Temperature: <span class="temp_val">{{ val.temperature }}</span>&#176 <span class="temp_sign">F</span></p>
+				<p class="card-text">Humidity: {{ val.humidity }}%</p>
+			      </div>
+			    </div>
+        </div>
+
+		{% endfor %}
+	{% endif %}
+     </div>
+    <!-- <div class="row">
+	<div class="col-md-4 ">
         <div class="card text-center box_shadow card_widget" >
               <div class="card-body">
                 <h4 class="card-title">{{ sensor_values.node_name }}</h4>
@@ -32,6 +52,6 @@
             </div>
         </div>
     <div class="row">
-</div>
+</div> -->
 
 {% endblock %}
