@@ -1,14 +1,9 @@
 body {
-    background: linear-gradient(to right, #594157, #271F30);
+    background: rgba(0,0,0,0.1); 
 }
 
-.card_widget {
-	margin-top: .2em;
-}
-
-.site-content {
-   /* padding-top: 10px;
-    padding-left: 10px; */
+.navbar {
+    background-color: #031927;
 }
 
 .box_shadow {
@@ -16,15 +11,8 @@ body {
 }
 
 .section_header {
-    color: white;
-}
-.section_header h1 {
+    color: black;
     text-align: center;
+    text-shadow: 2px 2px 8px #aaa;
 }
 
-.top_page {
-    color: white;
-    background-color: black;
-    height: 3em;
-    text-align: center;
-}

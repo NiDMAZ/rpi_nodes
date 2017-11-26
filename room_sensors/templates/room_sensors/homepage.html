@@ -2,56 +2,21 @@
 {% load staticfiles %}
 
 {% block site_content %}
-<div class="container">
-	{% if temperature is not None %}
-        <div class="row">
-            <h1 class="section_header">Temperature & Humidity</h1>
-       </div>
-       <div class="row">
-		{% for sensor, val in temperature.items %}
-			<div class="col-md-4 ">
-			<div class="card text-center box_shadow card_widget" >
-			      <div class="card-body">
-				<h4 class="card-title">{{ val.location }}</h4>
-				<h6 class="card-subtitle mb-2 text-muted">Updated: {{ val.updated  | date:"n/j/Y f:s A"}}</h6>
-				<p class="card-text">Temperature: <span class="temp_val">{{ val.temperature }}</span>&#176 <span class="temp_sign">F</span></p>
-				<p class="card-text">Humidity: {{ val.humidity }}%</p>
-			      </div>
-			    </div>
-        </div>
-
-		{% endfor %}
-	{% endif %}
-     </div>
-    <!-- <div class="row">
-	<div class="col-md-4 ">
-        <div class="card text-center box_shadow card_widget" >
-              <div class="card-body">
-                <h4 class="card-title">{{ sensor_values.node_name }}</h4>
-                <h6 class="card-subtitle mb-2 text-muted">Node#: {{ sensor_values.node_number }}</h6>
-                <p class="card-text">Last Refreshed: {{ sensor_values.time }}</p>
-              </div>
-            </div>
-        </div>
-	</br>
-        <div class="col-md-4 ">
-            <div class="card text-center box_shadow card_widget" >
-              <div class="card-body">
-                <h4 class="card-title">Temperature</h4>
-                <p class="card-text">{{ sensor_values.temperature }}&#176 F</p>
-              </div>
-            </div>
-        </div>
-	</br>
-        <div class="col-md-4 ">
-            <div class="card text-center box_shadow card_widget" >
-              <div class="card-body">
-                <h4 class="card-title">Humidity</h4>
-                <p class="card-text">{{sensor_values.humidity}}%</p>
-              </div>
-            </div>
-        </div>
-    <div class="row">
-</div> -->
-
+{% if temperature is not None %}
+    <h3 class="section_header">Temperature</h3>
+	<div class="row">
+	    {% for sensor, val in temperature.items %}
+		<div class="col">
+		    <div class="card text-center box_shadow">
+			<div class="card-body">
+			    <h4 class="card-title">{{ val.location }}</h4>
+			    <h6 class="card-subtitle mb-2 text-muted">Updated: {{ val.updated  | date:"n/j/Y f:s A"}}</h6>
+			    <p class="card-text">Temperature: <a class="temp_val">{{ val.temperature }}</a>&#176 <a class="temp_sign">F</a></p>
+			    <p class="card-text">Humidity: {{ val.humidity }}%</p>
+			</div> <!-- END card-body -->
+		    </div> <!-- END card -->
+		</div> <!-- END col -->
+	    {% endfor %}
+	</div> <!-- END row -->
+{% endif %}
 {% endblock %}

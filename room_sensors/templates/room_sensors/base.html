@@ -9,19 +9,22 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <link rel="stylesheet" href="{% static 'css/base.css' %}?20171125.3">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}?20171126.4">
 
     <title>RPi Node</title>
 </head>
-	<div class="container top_page box_shadow">
-	{{ room_name }}
-	</div>
-   <body class="site-body">
-	<div class="container">
-            <div class="site-content">
-                {% block site_content %}
-                {% endblock %}
-            </div>
-        </div>
-    </body>
+    <div class="fluid-container">
+        <nav class="navbar navbar-expand-sm bg-bark navbar-dark box_shadow">
+            <a class="navbar-brand" href="#">{{ room_name }} </a>
+        </nav>
+    </div>
+
+<body class="site-body">
+    <div class="container">
+        <div class="site-content">
+            {% block site_content %}
+            {% endblock %}
+        </div> <!-- END site-content -->
+    </div> <!-- END container -->
+</body>
 </html>
